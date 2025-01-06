@@ -4,11 +4,11 @@ using Microsoft.CodeAnalysis;
 namespace Packt.Shared;
 
 [Generator]
-public class ProgramSourceGenerator : ISourceGenerator
+public class ProgramSourceGenerator : IIncrementalGenerator
 {
-  public void Execute(GeneratorExecutionContext execContext)
+  public void Execute(IncrementalGeneratorInitializationContext execContext)
   {
-    IMethodSymbol? mainMethod = execContext.Compilation
+    IMethodSymbol? mainMethod = execContext.CompilationProvider
       .GetEntryPoint(execContext.CancellationToken);
     
     string sourceCode = $@"// Source-generated class.
